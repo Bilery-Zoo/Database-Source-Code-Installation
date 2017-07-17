@@ -1,0 +1,60 @@
+###
+# create_author: Bilery Zoo(652645572@qq.com)
+# create_time  : 2017-07-17
+# program      : *_*install MySQL5.7.18 on Ubuntu16.04LTS from source code*_*
+###
+
+
+apt install cmake bison libncurses5-dev
+
+
+wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.18.tar.gz
+tar -xzv -f mysql-boost-5.7.18.tar.gz
+
+
+cd mysql-5.7.18/
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/usr/local/mysql/data -DWITH_BOOST=boost
+make && make install
+
+
+groupadd mysql
+useradd -g mysql mysql
+mkdir /usr/local/mysql/data
+chown -R mysql /usr/local/mysql
+chgrp -R mysql /usr/local/mysql
+
+/usr/local/mysql/bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
+# [Note] A temporary password is generated for root@localhost: (+:rGtOj8><< #
+
+/usr/local/mysql/bin/mysql_ssl_rsa_setup
+
+vim /etc/my.cnf
+
+[client]
+socket = /tmp/mysql.sock
+
+[mysqld]
+socket = /tmp/mysql.sock
+basedir = /usr/local/mysql
+datadir = /usr/local/mysql/data
+
+
+cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
+chmod +x /etc/init.d/mysqld
+update-rc.d mysqld defaults
+service mysqld start
+
+PATH="$PATH":/usr/local/mysql/bin
+export PATH
+source /etc/profile
+
+mysql -uroot -p'(+:rGtOj8><<'
+ALTER USER 'root'@'localhost' IDENTIFIED BY '1024';
+
+vim /etc/my.cnf
+
+[client]
+user = root
+password = 1024
+port = 3306
+socket = /tmp/mysql.sock
