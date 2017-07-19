@@ -30,7 +30,7 @@ chgrp -R mysql /usr/local/mysql
 /usr/local/mysql/bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
 # [Note] A temporary password is generated for root@localhost: (+:rGtOj8><< #
 
-/usr/local/mysql/bin/mysql_ssl_rsa_setup
+/usr/local/mysql/bin/mysql_ssl_rsa_setup --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
 
 vim /etc/my.cnf
 
