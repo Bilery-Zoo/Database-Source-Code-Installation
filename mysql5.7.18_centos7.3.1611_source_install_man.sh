@@ -56,6 +56,8 @@ ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
 mysql -uroot -p'iN+(pF+a_9kp'
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '1024';
 
+firewall-cmd --add-port=3306/tcp --permanent
+systemctl restart firewalld.service
 vim /etc/my.cnf
 
 [client]
