@@ -56,8 +56,13 @@ ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
 mysql -uroot -p'iN+(pF+a_9kp'
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '1024';
 
+# CentOS 7 #
 firewall-cmd --add-port=3306/tcp --permanent
 systemctl restart firewalld.service
+# CentOS 6 #
+# iptables -I INPUT -p tcp --dport 3306 -j ACCEPT
+# service iptables save
+# service iptables restart
 vim /etc/my.cnf
 
 [client]
