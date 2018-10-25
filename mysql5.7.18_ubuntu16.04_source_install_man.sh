@@ -6,7 +6,7 @@
 
 
 # ①install OS relation
-apt install cmake bison libncurses5-dev
+apt install cmake bison libncurses5-dev build-essential
 
 
 # ②download source code
