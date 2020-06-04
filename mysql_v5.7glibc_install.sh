@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Author    : Bilery Zoo(bilery.zoo@gmail.com)
+# author    : Bilery Zoo(bilery.zoo@gmail.com)
 # create_ts : 2020-02-02
 # program   : install & init & launch MySQL V-5.7.26-linux-glibc
 
