@@ -234,6 +234,7 @@ function launch_mysql_service() {
     ps aux | grep mysqld | grep -v grep > /dev/null
     if [ $? -eq 0 ]; then
         echo "Launch MySQL service @@${directory_storage} success"
+	return 0
     else
         echo "Launch MySQL service @@${directory_storage} failed"
         exit 1
