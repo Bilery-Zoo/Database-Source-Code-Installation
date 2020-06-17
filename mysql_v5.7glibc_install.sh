@@ -194,31 +194,16 @@ function prepare_mysql_install() {
         echo "Download MySQL source package failed"
         exit 1
     fi
-    if [ $? -eq 0 ]; then
-        grep mysql /etc/group > /dev/null
-    else
-        echo "Prepare MySQL base directory failed"
-        exit 1
-    fi
+    grep mysql /etc/group > /dev/null
     if [ $? -eq 1 ]; then
         groupadd mysql
     fi
-    if [ $? -eq 0 ]; then
-        grep mysql /etc/passwd > /dev/null
-    else
-        echo "Add mysql os group failed"
-        exit 1
-    fi
+    grep mysql /etc/passwd > /dev/null
     if [ $? -eq 1 ]; then
         useradd -g mysql mysql
     fi
-    if [ $? -eq 0 ]; then
-        if [ -e /etc/my.cnf ]; then
-            mv /etc/my.cnf /etc/my.cnf.default
-        fi
-    else
-        echo "Add mysql os user failed"
-        exit 1
+    if [ -e /etc/my.cnf ]; then
+        mv /etc/my.cnf /etc/my.cnf.default
     fi
     grep "${directory_base}/bin" /etc/profile > /dev/null
     if [ $? -eq 1 ]; then
